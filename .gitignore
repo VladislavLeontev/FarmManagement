@@ -5,3 +5,5 @@
 *.suo
 /.vs
 /FarmManagement/obj
+/FarmManagement/bin/Debug/net8.0
+/FarmManagement/FarmManagementClient/.vscode
