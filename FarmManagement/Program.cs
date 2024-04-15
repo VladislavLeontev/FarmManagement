@@ -1,28 +1,37 @@
-using System.Text.Json.Serialization;
-using System.Text.Json;
-var builder = WebApplication.CreateSlimBuilder(args);
+using FarmManagement;
+using Microsoft.EntityFrameworkCore;
 
-builder.Services.ConfigureHttpJsonOptions(options =>
-{
-	options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
-});
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+builder.Services.AddDbContext<AppDbContext>(options =>
+	options
+		.UseInMemoryDatabase("FarmManagement")
+);
+
+
 
 var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app
+	.UseRouting()
+	.UseEndpoints(endpoints =>
+	{
+		endpoints.MapControllers();
+		endpoints.MapDefaultControllerRoute();
+	});
+
 if (app.Environment.IsDevelopment())
 {
+	app.UseHsts();
 	app.UseSpa(config =>
 	{
 		config.UseProxyToSpaDevelopmentServer("http://localhost:4200");
 	});
 }
-app.Run();
 
-
-[JsonSerializable(typeof(string))]
-internal partial class AppJsonSerializerContext : JsonSerializerContext
-{
-
-}
-
+await app.RunAsync();
 
 
