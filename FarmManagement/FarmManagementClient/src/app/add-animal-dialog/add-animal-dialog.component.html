@@ -1,0 +1,33 @@
+<form>
+  <mat-form-field>
+    <input matInput placeholder="Animal name" [formControl]="form.controls.name">
+    <mat-error *ngIf="form.controls.name.invalid && form.controls.name.errors?.['required']">
+      Name is required
+    </mat-error>
+    <mat-error *ngIf="form.controls.name.invalid && form.controls.name.errors?.['nameUniqueness']">
+      Animal with this name already exists
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Animal Species</mat-label>
+    <mat-select [formControl]="form.controls.type">
+      @for (option of options; track option) {
+        <mat-option [value]="option">{{option}}</mat-option>
+      }
+    </mat-select>
+    <mat-error *ngIf="form.controls.type.invalid && form.controls.type.errors?.['required']">
+      Species is required
+    </mat-error>
+  </mat-form-field>
+</form>
+<div class="button-container">
+  <button mat-button mat-flat-button [disabled]="isAdding" [mat-dialog-close]="false">No thanks</button>
+  <button mat-button mat-raised-button color="primary" (click)="submit()">
+    <span *ngIf="!isAdding; else adding">Add</span>
+  </button>
+</div>
+
+<ng-template #adding>
+  <mat-spinner diameter="20"></mat-spinner>
+</ng-template>

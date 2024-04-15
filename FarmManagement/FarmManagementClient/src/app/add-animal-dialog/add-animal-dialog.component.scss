@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  padding: 24px;
+
+}
+
+.button-container{
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}

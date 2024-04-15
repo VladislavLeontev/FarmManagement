@@ -25,6 +25,18 @@ namespace FarmManagement.Controllers
 			return Ok(list);
 		}
 
+		[HttpGet("{name}")]
+		public async Task<IActionResult> GetAsync(string name)
+		{
+			var animal = await _db.Animals.FindAsync(name);
+			if (animal == null)
+			{
+				return NotFound();
+			}
+
+			return Ok(animal);
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> PostAsync(Animal animal)
 		{

@@ -1,0 +1,14 @@
+<div class="animal">
+  <div>
+    <p class="name">{{ name }}</p>
+    <span class="type">{{ type }}</span>
+  </div>
+  <button mat-fab color="warn" (click)="onRemoveClick()">
+    <mat-icon *ngIf="!isRemoving; else removing" >delete</mat-icon>
+  </button>
+
+</div>
+
+<ng-template #removing>
+  <mat-spinner color="accent" diameter="20"></mat-spinner>
+</ng-template>

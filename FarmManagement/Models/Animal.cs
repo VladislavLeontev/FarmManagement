@@ -8,6 +8,6 @@ namespace FarmManagement.Models
         [Key]
         public string Name { get; set; }
 
-        public AnimalType AnimalType { get; set; }
+        public string Type { get; set; }
     }
 }
